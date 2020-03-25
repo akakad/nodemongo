@@ -7,7 +7,7 @@ pipeline {
     }
     stage('Clone API Builder project') {
       steps {
-        git 'https://github.com/akakad/nodemongo'
+        git 'https://github.com/akakad/nodemongo.git'
       }
     }
     stage('Build Docker image') {
