@@ -1,22 +1,17 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:10'
-            args '-p 5001:8080 -p 5002:8080'
-        }
-    }
+    agent any
     environment {
-        CI = 'true'
+        COMPOSE_PROJECT_NAME = "${env.JOB_NAME}-${env.BUILD_ID}"
     }
-    stages {
-        stage('Build') {
+        stage("Build and start image") {
             steps {
-                sh 'npm install'
+                sh "docker-compose up -d --build"
             }
         }
-        stage('Test') {
+            stage("Test image") {
             steps {
-                sh './jenkins/scripts/test.sh'
+                sh "docker images"
+                sh "docker ps"
             }
         }
 }
