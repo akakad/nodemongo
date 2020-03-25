@@ -8,10 +8,4 @@ pipeline {
                 sh "docker-compose up -d --build"
             }
         }
-            stage("Test image") {
-            steps {
-                sh "docker images"
-                sh "docker ps"
-            }
-        }
 }
